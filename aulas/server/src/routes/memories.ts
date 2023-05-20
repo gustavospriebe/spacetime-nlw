@@ -14,7 +14,7 @@ export async function memoriesRoutes(app: FastifyInstance) {
             return {
                 id: memory.id,
                 coverUrl: memory.coverUrl,
-                excerpt: memory.content.substring(0, 115).concat("..."),
+                content: memory.content.substring(0, 96).concat("..."),
             };
         });
     });
@@ -47,55 +47,15 @@ export async function memoriesRoutes(app: FastifyInstance) {
         const memory = await prisma.memory.create({
             data: {
                 content,
-                coverUrl,
                 isPublic,
-                userId: "5ac8562f-5c67-49da-8319-5646cf8b8b6d",
+                coverUrl,
+                userId: "a9f8977d-0652-45e9-ad90-9274099aea74",
             },
         });
-
         return memory;
     });
 
-    app.put("/memories/:id", async (request) => {
-        const paramsSchema = z.object({
-            id: z.string().uuid(),
-        });
+    app.put("/memories/:id", async () => {});
 
-        const { id } = paramsSchema.parse(request.params);
-
-        const bodySchema = z.object({
-            content: z.string(),
-            coverUrl: z.string(),
-            isPublic: z.coerce.boolean().default(false),
-        });
-
-        const { content, coverUrl, isPublic } = bodySchema.parse(request.body);
-
-        const memory = await prisma.memory.update({
-            where: {
-                id,
-            },
-            data: {
-                content,
-                coverUrl,
-                isPublic,
-            },
-        });
-
-        return memory;
-    });
-
-    app.delete("/memories/:id", async (request) => {
-        const paramsSchema = z.object({
-            id: z.string().uuid(),
-        });
-
-        const { id } = paramsSchema.parse(request.params);
-
-        await prisma.memory.delete({
-            where: {
-                id,
-            },
-        });
-    });
+    app.delete("/memories/:id", async () => {});
 }
