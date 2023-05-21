@@ -1,5 +1,5 @@
-import { cookies } from "next/headers";
 import decode from "jwt-decode";
+import { cookies } from "next/headers";
 
 interface User {
     sub: string;

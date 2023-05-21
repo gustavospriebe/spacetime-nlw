@@ -1,4 +1,4 @@
-import { Roboto_Flex, Bai_Jamjuree } from "next/font/google";
+import { Bai_Jamjuree, Roboto_Flex } from "next/font/google";
 import "./globals.css";
 
 const roboto = Roboto_Flex({ subsets: ["latin"], variable: "--font-roboto" });

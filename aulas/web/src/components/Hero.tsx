@@ -1,9 +1,7 @@
 import Image from "next/image";
 import nlwLogo from "../assets/nlw-spacetime.svg";
 
-
 export function Hero() {
-
     return (
         <div className="space-y-5">
             <Image src={nlwLogo} alt="nlw-spacetime" />

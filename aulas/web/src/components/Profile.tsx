@@ -1,5 +1,4 @@
 import { getUser } from "@/lib/auth";
-import { User } from "lucide-react";
 import Image from "next/image";
 
 export function Profile() {

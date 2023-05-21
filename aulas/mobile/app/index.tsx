@@ -4,17 +4,17 @@ import {
     Roboto_700Bold,
     useFonts,
 } from "@expo-google-fonts/roboto";
-import { StatusBar } from "expo-status-bar";
-import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
-
-import { styled } from "nativewind";
-import bgBlur from "./src/assets/bg-blur.png";
-import NLWLogo from "./src/assets/nlw-spacetime-logo.svg";
-import Stripes from "./src/assets/stripes.svg";
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
-import { useEffect } from "react";
-import { api } from "./src/lib/api";
+import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
+import { StatusBar } from "expo-status-bar";
+import { styled } from "nativewind";
+import { useEffect } from "react";
+import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import bgBlur from "../src/assets/bg-blur.png";
+import NLWLogo from "../src/assets/nlw-spacetime-logo.svg";
+import Stripes from "../src/assets/stripes.svg";
+import { api } from "../src/lib/api";
 
 const StylesStripes = styled(Stripes);
 
@@ -26,13 +26,15 @@ const discovery = {
 };
 
 export default function App() {
+    const router = useRouter();
+
     const [hasLoadedFonts] = useFonts({
         Roboto_400Regular,
         Roboto_700Bold,
         BaiJamjuree_700Bold,
     });
 
-    const [request, response, signInWithGithub] = useAuthRequest(
+    const [, response, signInWithGithub] = useAuthRequest(
         {
             clientId: "6002d2185f04f6d5ccd7",
             scopes: ["identity"],
@@ -43,6 +45,20 @@ export default function App() {
         discovery
     );
 
+    async function handleGithubOAuthCode(code: string) {
+        const response = await api.post("/register", {
+            code,
+        });
+
+        const { token } = response.data;
+
+        await SecureStore.setItemAsync("token", token);
+
+        console.log("sucesso");
+
+        router.push("memories");
+    }
+
     useEffect(() => {
         // console.log(makeRedirectUri({
         //     scheme: "nlwspacetime",
@@ -50,21 +66,8 @@ export default function App() {
 
         if (response?.type === "success") {
             const { code } = response.params;
-            console.log(code);
 
-            api.post("/register", {
-                code,
-            })
-                .then((response) => {
-                    const { token } = response.data;
-
-                    SecureStore.setItemAsync("token", token);
-                    console.log("sucesso");
-                    console.log(token);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
+            handleGithubOAuthCode(code);
         }
     }, [response]);
 

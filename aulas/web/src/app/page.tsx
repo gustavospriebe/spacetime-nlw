@@ -1,9 +1,9 @@
-import { cookies } from "next/headers";
 import { Copyright } from "@/components/Copyright";
 import { EmptyMemories } from "@/components/EmptyMemories";
 import { Hero } from "@/components/Hero";
-import { Signin } from "@/components/Signin";
 import { Profile } from "@/components/Profile";
+import { Signin } from "@/components/Signin";
+import { cookies } from "next/headers";
 
 export default function Home() {
     const isAuthenticated = cookies().has("token");
