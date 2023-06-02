@@ -46,11 +46,11 @@ export default function App() {
     );
 
     async function handleGithubOAuthCode(code: string) {
-        const response = await api.post("/register", {
+        const responseOAuth = await api.post("/register", {
             code,
         });
 
-        const { token } = response.data;
+        const { token } = responseOAuth.data;
 
         await SecureStore.setItemAsync("token", token);
 
