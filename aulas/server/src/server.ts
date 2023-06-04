@@ -14,7 +14,7 @@ app.register(jwt, { secret: "spacetime" });
 
 app.listen({
     port: 3333,
-    // host: "0.0.0.0",
+    host: "0.0.0.0",
 }).then(() => {
     console.log("listening on port http://localhost:3333 🤣");
 });
