@@ -29,8 +29,6 @@ export async function authRoutes(app: FastifyInstance) {
 
         const { access_token } = accessTokenResponse.data;
 
-        console.log(access_token);
-
         // Faz uma request dos dados do usuário do GitHub com a access_token
         const userResponse = await axios.get("https://api.github.com/user", {
             headers: {
