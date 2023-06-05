@@ -7,7 +7,10 @@ export function EmptyMemories() {
                 Você ainda não registrou nenhuma lembrança,
                 <br />
                 comece a{" "}
-                <Link href="/memories/new" className="underline hover:text-gray-50">
+                <Link
+                    href="/memories/new"
+                    className="underline hover:text-gray-50"
+                >
                     criar agora
                 </Link>
                 !
