@@ -12,7 +12,6 @@ export default function NewMemory() {
                 <ChevronLeft className="h-4 w-4" />
                 voltar à timeline
             </Link>
-
             <NewMemoryForm />
         </div>
     );
