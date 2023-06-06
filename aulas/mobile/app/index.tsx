@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import NLWLogo from "../src/assets/nlw-spacetime-logo.svg";
 import { api } from "../src/lib/api";
+import React from "react";
 
 const discovery = {
     authorizationEndpoint: "https://github.com/login/oauth/authorize",

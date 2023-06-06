@@ -8,7 +8,7 @@ import { SplashScreen, Stack } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 import { styled } from "nativewind";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ImageBackground } from "react-native";
 import bgBlur from "../src/assets/bg-blur.png";
 import Stripes from "../src/assets/stripes.svg";
@@ -50,6 +50,7 @@ export default function Layout() {
                 screenOptions={{
                     headerShown: false,
                     contentStyle: { backgroundColor: "transparent" },
+                    animation: "fade",
                 }}
             >
                 <Stack.Screen name="index" redirect={isUserAuthenticated} />
